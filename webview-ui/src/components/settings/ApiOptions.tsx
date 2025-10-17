@@ -28,6 +28,7 @@ import {
 	cerebrasDefaultModelId,
 	chutesDefaultModelId,
 	bedrockDefaultModelId,
+	poeDefaultModelId,
 	vertexDefaultModelId,
 	sambaNovaDefaultModelId,
 	internationalZAiDefaultModelId,
@@ -107,6 +108,7 @@ import {
 	VercelAiGateway,
 	DeepInfra,
 	OvhCloudAiEndpoints, // kilocode_change
+	Poe,
 } from "./providers"
 
 import { MODELS_BY_PROVIDER, PROVIDERS } from "./constants"
@@ -221,6 +223,7 @@ const ApiOptions = ({
 		geminiApiKey: apiConfiguration?.geminiApiKey,
 		googleGeminiBaseUrl: apiConfiguration?.googleGeminiBaseUrl,
 		chutesApiKey: apiConfiguration?.chutesApiKey,
+		poeApiKey: apiConfiguration?.poeApiKey,
 	})
 
 	//const { data: openRouterModelProviders } = useOpenRouterModelProviders(
@@ -272,7 +275,8 @@ const ApiOptions = ({
 			} else if (
 				selectedProvider === "litellm" ||
 				selectedProvider === "deepinfra" ||
-				selectedProvider === "chutes" // kilocode_change
+				selectedProvider === "chutes" || // kilocode_change
+				selectedProvider === "poe"
 			) {
 				vscode.postMessage({ type: "requestRouterModels" })
 			}
@@ -290,6 +294,7 @@ const ApiOptions = ({
 			apiConfiguration?.deepInfraApiKey,
 			apiConfiguration?.deepInfraBaseUrl,
 			apiConfiguration?.chutesApiKey, // kilocode_change
+			apiConfiguration?.poeApiKey,
 			apiConfiguration?.ovhCloudAiEndpointsBaseUrl, // kilocode_change
 			customHeaders,
 		],
@@ -406,6 +411,7 @@ const ApiOptions = ({
 				openai: { field: "openAiModelId" },
 				ollama: { field: "ollamaModelId" },
 				lmstudio: { field: "lmStudioModelId" },
+				poe: { field: "poeModelId", default: poeDefaultModelId },
 				// kilocode_change start
 				kilocode: { field: "kilocodeModel", default: kilocodeDefaultModel },
 				"gemini-cli": { field: "apiModelId", default: geminiCliDefaultModelId },
@@ -737,6 +743,16 @@ const ApiOptions = ({
 
 			{selectedProvider === "vercel-ai-gateway" && (
 				<VercelAiGateway
+					apiConfiguration={apiConfiguration}
+					setApiConfigurationField={setApiConfigurationField}
+					routerModels={routerModels}
+					organizationAllowList={organizationAllowList}
+					modelValidationError={modelValidationError}
+				/>
+			)}
+
+			{selectedProvider === "poe" && (
+				<Poe
 					apiConfiguration={apiConfiguration}
 					setApiConfigurationField={setApiConfigurationField}
 					routerModels={routerModels}

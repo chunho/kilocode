@@ -45,6 +45,7 @@ import {
 	claudeCodeDefaultModelId,
 	geminiCliModels,
 	geminiCliDefaultModelId,
+	poeDefaultModelId,
 } from "@roo-code/types"
 
 /**
@@ -62,6 +63,7 @@ export type RouterName =
 	| "io-intelligence"
 	| "deepinfra"
 	| "vercel-ai-gateway"
+	| "poe"
 
 /**
  * ModelInfo interface - mirrors the one from packages/types/src/model.ts
@@ -95,6 +97,7 @@ export type RouterModels = Record<RouterName, ModelRecord>
  */
 export const PROVIDER_TO_ROUTER_NAME: Record<ProviderName, RouterName | null> = {
 	kilocode: "kilocode-openrouter",
+	poe: "poe",
 	openrouter: "openrouter",
 	ollama: "ollama",
 	lmstudio: "lmstudio",
@@ -178,6 +181,7 @@ export const PROVIDER_MODEL_FIELD: Record<ProviderName, string | null> = {
 	"gemini-cli": null,
 	"virtual-quota-fallback": null,
 	huggingface: null,
+	poe: "poeModelId",
 }
 
 /**
@@ -242,6 +246,7 @@ export const DEFAULT_MODEL_IDS: Partial<Record<ProviderName, string>> = {
 	zai: internationalZAiDefaultModelId,
 	roo: rooDefaultModelId,
 	"gemini-cli": geminiCliDefaultModelId,
+	poe: poeDefaultModelId,
 }
 
 /**
@@ -413,6 +418,8 @@ export function getModelIdKey(provider: ProviderName): string {
 			return "ioIntelligenceModelId"
 		case "vercel-ai-gateway":
 			return "vercelAiGatewayModelId"
+		case "poe":
+			return "poeModelId"
 		default:
 			return "apiModelId"
 	}

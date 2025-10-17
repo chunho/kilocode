@@ -24,6 +24,7 @@ export { OpenRouterHandler } from "./openrouter"
 export { OVHcloudAIEndpointsHandler } from "./ovhcloud" // kilocode_change
 export { QwenCodeHandler } from "./qwen-code"
 export { RequestyHandler } from "./requesty"
+export { PoeHandler } from "./poe"
 export { SambaNovaHandler } from "./sambanova"
 export { UnboundHandler } from "./unbound"
 export { VertexHandler } from "./vertex"

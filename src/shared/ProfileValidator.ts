@@ -90,6 +90,8 @@ export class ProfileValidator {
 				return profile.ollamaModelId
 			case "requesty":
 				return profile.requestyModelId
+			case "poe":
+				return profile.poeModelId
 			case "io-intelligence":
 				return profile.ioIntelligenceModelId
 			case "deepinfra":

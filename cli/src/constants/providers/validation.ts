@@ -37,6 +37,7 @@ export const PROVIDER_REQUIRED_FIELDS: Record<ProviderName, string[]> = {
 	unbound: ["unboundApiKey", "unboundModelId"],
 	requesty: ["requestyApiKey", "requestyModelId"],
 	roo: ["apiModelId"],
+	poe: ["poeApiKey", "poeModelId"],
 	"vercel-ai-gateway": ["vercelAiGatewayApiKey", "vercelAiGatewayModelId"],
 	"human-relay": ["apiModelId"],
 	"fake-ai": ["apiModelId"],

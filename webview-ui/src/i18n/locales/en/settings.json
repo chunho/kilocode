@@ -344,6 +344,8 @@
 		"codestralBaseUrlDesc": "Set an alternative URL for the Codestral model.",
 		"xaiApiKey": "xAI API Key",
 		"getXaiApiKey": "Get xAI API Key",
+		"poeApiKey": "Poe API Key",
+		"getPoeApiKey": "Get Poe API Key",
 		"litellmApiKey": "LiteLLM API Key",
 		"litellmBaseUrl": "LiteLLM Base URL",
 		"awsCredentials": "AWS Credentials",

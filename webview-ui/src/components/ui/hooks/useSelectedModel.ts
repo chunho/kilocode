@@ -48,6 +48,7 @@ import {
 	mainlandZAiDefaultModelId,
 	internationalZAiModels,
 	mainlandZAiModels,
+	poeDefaultModelId,
 	fireworksModels,
 	fireworksDefaultModelId,
 	syntheticModels, // kilocode_change
@@ -454,6 +455,11 @@ function getSelectedModel({
 		case "ovhcloud": {
 			const id = apiConfiguration.ovhCloudAiEndpointsModelId ?? ovhCloudAiEndpointsDefaultModelId
 			const info = routerModels.ovhcloud[id]
+			return { id, info }
+		}
+		case "poe": {
+			const id = apiConfiguration.poeModelId ?? poeDefaultModelId
+			const info = routerModels.poe?.[id]
 			return { id, info }
 		}
 		// kilocode_change end

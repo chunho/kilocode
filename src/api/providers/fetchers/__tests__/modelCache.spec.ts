@@ -22,6 +22,7 @@ vi.mock("fs/promises", () => ({
 vi.mock("../litellm")
 vi.mock("../openrouter")
 vi.mock("../requesty")
+vi.mock("../poe")
 vi.mock("../glama")
 vi.mock("../unbound")
 vi.mock("../io-intelligence")
@@ -33,6 +34,7 @@ import { getModels } from "../modelCache"
 import { getLiteLLMModels } from "../litellm"
 import { getOpenRouterModels } from "../openrouter"
 import { getRequestyModels } from "../requesty"
+import { getPoeModels } from "../poe"
 import { getGlamaModels } from "../glama"
 import { getUnboundModels } from "../unbound"
 import { getIOIntelligenceModels } from "../io-intelligence"
@@ -41,12 +43,14 @@ import { getOvhCloudAiEndpointsModels } from "../ovhcloud" // kilocode_change
 const mockGetLiteLLMModels = getLiteLLMModels as Mock<typeof getLiteLLMModels>
 const mockGetOpenRouterModels = getOpenRouterModels as Mock<typeof getOpenRouterModels>
 const mockGetRequestyModels = getRequestyModels as Mock<typeof getRequestyModels>
+const mockGetPoeModels = getPoeModels as Mock<typeof getPoeModels>
 const mockGetGlamaModels = getGlamaModels as Mock<typeof getGlamaModels>
 const mockGetUnboundModels = getUnboundModels as Mock<typeof getUnboundModels>
 const mockGetIOIntelligenceModels = getIOIntelligenceModels as Mock<typeof getIOIntelligenceModels>
 const mockGetOvhCloudAiEndpointsModels = getOvhCloudAiEndpointsModels as Mock<typeof getOvhCloudAiEndpointsModels> // kilocode_change
 
 const DUMMY_REQUESTY_KEY = "requesty-key-for-testing"
+const DUMMY_POE_KEY = "poe-key-for-testing"
 const DUMMY_UNBOUND_KEY = "unbound-key-for-testing"
 const DUMMY_IOINTELLIGENCE_KEY = "io-intelligence-key-for-testing"
 
@@ -107,6 +111,23 @@ describe("getModels with new GetModelsOptions", () => {
 		const result = await getModels({ provider: "requesty", apiKey: DUMMY_REQUESTY_KEY })
 
 		expect(mockGetRequestyModels).toHaveBeenCalledWith(undefined, DUMMY_REQUESTY_KEY)
+		expect(result).toEqual(mockModels)
+	})
+
+	it("calls getPoeModels with optional API key", async () => {
+		const mockModels = {
+			"claude-4.5-sonnet": {
+				maxTokens: 8192,
+				contextWindow: 200000,
+				supportsPromptCache: true,
+				description: "Poe model",
+			},
+		}
+		mockGetPoeModels.mockResolvedValue(mockModels)
+
+		const result = await getModels({ provider: "poe", apiKey: DUMMY_POE_KEY })
+
+		expect(mockGetPoeModels).toHaveBeenCalledWith(undefined, DUMMY_POE_KEY)
 		expect(result).toEqual(mockModels)
 	})
 

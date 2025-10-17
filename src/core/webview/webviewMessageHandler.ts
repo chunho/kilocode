@@ -814,6 +814,7 @@ export const webviewMessageHandler = async (
 				ollama: {},
 				lmstudio: {},
 				ovhcloud: {}, // kilocode_change
+				poe: {},
 			}
 
 			const safeGetModels = async (options: GetModelsOptions): Promise<ModelRecord> => {
@@ -832,11 +833,17 @@ export const webviewMessageHandler = async (
 			// kilocode_change start: openrouter auth, kilocode provider
 			const openRouterApiKey = apiConfiguration.openRouterApiKey || message?.values?.openRouterApiKey
 			const openRouterBaseUrl = apiConfiguration.openRouterBaseUrl || message?.values?.openRouterBaseUrl
+			const poeApiKey = apiConfiguration.poeApiKey || message?.values?.poeApiKey
+			const poeBaseUrl = apiConfiguration.poeBaseUrl || message?.values?.poeBaseUrl
 
 			const modelFetchPromises: Array<{ key: RouterName; options: GetModelsOptions }> = [
 				{
 					key: "openrouter",
 					options: { provider: "openrouter", apiKey: openRouterApiKey, baseUrl: openRouterBaseUrl },
+				},
+				{
+					key: "poe",
+					options: { provider: "poe", apiKey: poeApiKey, baseUrl: poeBaseUrl },
 				},
 				// kilocode_change start
 				{

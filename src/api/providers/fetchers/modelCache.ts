@@ -15,6 +15,7 @@ import { fileExistsAtPath } from "../../../utils/fs"
 import { getOpenRouterModels } from "./openrouter"
 import { getVercelAiGatewayModels } from "./vercel-ai-gateway"
 import { getRequestyModels } from "./requesty"
+import { getPoeModels } from "./poe"
 import { getGlamaModels } from "./glama"
 import { getUnboundModels } from "./unbound"
 import { getLiteLLMModels } from "./litellm"
@@ -81,6 +82,10 @@ export const getModels = async (options: GetModelsOptions): Promise<ModelRecord>
 			case "requesty":
 				// Requesty models endpoint requires an API key for per-user custom policies.
 				models = await getRequestyModels(options.baseUrl, options.apiKey)
+				break
+			case "poe":
+				// Poe models endpoint for an API.
+				models = await getPoeModels(options.apiKey)
 				break
 			case "glama":
 				models = await getGlamaModels()

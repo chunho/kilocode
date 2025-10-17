@@ -452,6 +452,18 @@ export const FIELD_REGISTRY: Record<string, FieldMetadata> = {
 		placeholder: "Enter model ID...",
 	},
 
+	// Poe fields
+	poeApiKey: {
+		label: "API Key",
+		type: "password",
+		placeholder: "Enter Poe API key...",
+	},
+	poeModelId: {
+		label: "Model ID",
+		type: "text",
+		placeholder: "Enter model ID...",
+	},
+
 	// Virtual Quota Fallback fields
 	profiles: {
 		label: "Profiles Configuration",
@@ -746,6 +758,9 @@ export const getProviderSettings = (provider: ProviderName, config: ProviderSett
 				createFieldConfig("vercelAiGatewayModelId", config, "gpt-4o"),
 			]
 
+		case "poe":
+			return [createFieldConfig("poeApiKey", config), createFieldConfig("poeModelId", config, "GPT-4o")]
+
 		case "virtual-quota-fallback":
 			return [
 				{
@@ -824,6 +839,7 @@ export const PROVIDER_DEFAULT_MODELS: Record<ProviderName, string> = {
 	roo: "gpt-4o",
 	"vercel-ai-gateway": "gpt-4o",
 	"virtual-quota-fallback": "gpt-4o",
+	poe: "gpt-4o",
 	"human-relay": "human",
 	"fake-ai": "fake-model",
 }

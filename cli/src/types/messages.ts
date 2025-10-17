@@ -103,6 +103,7 @@ export type ProviderName =
 	| "io-intelligence"
 	| "roo"
 	| "vercel-ai-gateway"
+	| "poe"
 
 // Provider Settings Entry for profile metadata
 export interface ProviderSettingsEntry {
@@ -319,6 +320,10 @@ export interface ProviderSettings {
 	// Vercel AI Gateway
 	vercelAiGatewayApiKey?: string
 	vercelAiGatewayModelId?: string
+
+	// Poe
+	poeApiKey?: string
+	poeModelId?: string
 
 	// Allow additional fields for extensibility
 	[key: string]: any
